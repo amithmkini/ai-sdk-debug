@@ -22,7 +22,7 @@ export const dynamic = "force-dynamic"
 
 
 async function askLLM(iteration: number, response: any) {
-  const result = createStreamableUI(<div>{"Starting from: " + iteration}</div>);
+  const result = createStreamableUI(<div>{"Starting from depth: " + iteration}</div>);
   response.append(result.value);
   
   // Simulate multiple calls to the API and responses
@@ -30,7 +30,7 @@ async function askLLM(iteration: number, response: any) {
   (async () => {
     // Wait for 2 seconds before responding
     await new Promise((resolve) => setTimeout(resolve, 2000))
-    result.done(<div>{"Response from: " + iteration}</div>)
+    result.done(<div>{"Response from depth: " + iteration}</div>)
     // Ask AI 3 times before ending the conversation
     if (iteration < 2) {
       await askLLM(iteration + 1, response)

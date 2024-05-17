@@ -1,6 +1,6 @@
 "use client"
 
-import { type AI } from "@/actions"
+import { type AI } from "./actions"
 import { useActions, useUIState } from "ai/rsc"
 
 
