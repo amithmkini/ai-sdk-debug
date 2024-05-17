@@ -18,16 +18,9 @@ export default function Chat() {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-4 bg-gray-100 h-full w-full">
+    <div className="flex flex-col gap-4 p-4 bg-gray-100">
       <div className="max-w-2xl px-4">
         {messages.map((message) => {
-          if (message.display === null) return null
-          if (Array.isArray(message.display) && 
-              !message.display.some(
-                item => item !== null && item !== undefined)) {
-            return null
-          }
-
           return (
             <div key={message.id} className="flex flex-col gap-2 py-2">
               {message.display !== null && message.display}
@@ -37,8 +30,11 @@ export default function Chat() {
       </div>
       <form onSubmit={handleOnSubmit} method="post">
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
-          type="submit">Send</button>
+          className="bg-blue-500 text-white font-bold py-2 px-4 rounded" 
+          type="submit"
+        >
+          Send
+        </button>
       </form>
     </div>
   )

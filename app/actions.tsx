@@ -1,13 +1,7 @@
 import "server-only"
 
-import {
-  CoreMessage,
-} from "ai"
-import {
-  createAI,
-  createStreamableUI,
-  getAIState
-} from "ai/rsc"
+import { CoreMessage } from "ai"
+import { createAI, createStreamableUI } from "ai/rsc"
 import { nanoid } from "nanoid"
 
 export type AIState = Array<CoreMessage>
@@ -16,10 +10,6 @@ export type UIState = {
   id: string
   display: React.ReactNode
 }[]
-
-
-export const dynamic = "force-dynamic"
-
 
 async function askLLM(iteration: number, response: any) {
   const result = createStreamableUI(<div>{"Starting from depth: " + iteration}</div>);
@@ -58,22 +48,5 @@ export const AI = createAI<AIState, UIState>({
     submitUserMessage
   },
   initialUIState: [],
-  initialAIState: [],
-  onGetUIState: async () => {
-    "use server"
-
-    // Honestly, this is only needed because I have sample
-    // data in the Chat component. In a real-world scenario,
-    // you would be loading data from DB or some other source.
-    const aiState = getAIState() as AIState
-    const uiState = aiState.map((message) => {
-      return {
-        id: nanoid(),
-        display: <div>TESTING</div>
-      }
-    })
-
-    return uiState
-  }
+  initialAIState: []
 })
-
